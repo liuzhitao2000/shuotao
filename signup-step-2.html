@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+<link rel="stylesheet" href='signup.css'>
+
+</head>
+<body>
+	<div class='navigation'><h1 class='shadow'>注册</h1></div>
+	<div id='st-signup-step' class='wrap'>
+		<ul class='radius-li'>
+			<li><input id='user-phone' type='text' placeholder='请输入你常用的手机号码'/></li>
+		</ul>
+		<div class='signup-desc'>请输入常用的手机号码获取密码，并帮你找到更多好友</div>
+		<a href='STaction://signup-step-3.html' id='next-btn' class='st-lowlight-btn'>下一步</a>
+	</div>
+
+	<script src="phonegap/phonegap-1.0.0.js"></script>
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI().use("node","event","json",function(Y){
+			Y.on('click',function(e){
+				e.preventDefault();
+				
+				var win = function(r) {
+						var respo = Y.JSON.parse(r.response);
+						
+						if(respo.status==200){
+							localStorage.setItem('sessionid',respo.session_id);
+							localStorage.setItem('pwd',respo.pws);
+							localStorage.setItem('userid',respo.user_id);
+							localStorage.setItem('userphone',params.user_phone);
+							
+							location.href= Y.one('#next-btn').get('href');
+						}else{
+							navigator.notification.alert(respo.msg,function(){}, "提示", "返回重填");
+						}
+				}
+
+				var fail = function(error) {
+						alert("An error has occurred: Code = " = error.code);
+				}
+
+
+				var options = new FileUploadOptions();
+
+				var params = new Object();
+				params.user_name = localStorage.getItem('username');
+				params.user_phone = Y.one('#user-phone').get('value');
+
+				options.params = params;
+
+				var ft = new FileTransfer();
+				ft.upload('', "http://shuotao.me/staoapi/register.php", win, fail, options);
+			},'#next-btn');
+		});
+	</script>		
+</body>
+</html>

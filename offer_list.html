@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+</head>
+<body>
+	<div class='navigation'><h1 class='shadow'>周边团购</h1></div>
+	<div id='offer-list-wrap'>
+	
+	
+	
+	</div>
+
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI({
+			groups: {
+				st: {
+						 base: './',
+						 modules: {
+									'mustache':{
+										path:'mustache/mustache.js'	
+									},
+									'st-offer-list-style':{
+										type:'css',
+										path:'offer-list.css'
+									},
+									'st-offer-list':{
+										requires:["base","node","io","mustache","node-load","widget","event","st-offer-list-style","array-extras"],
+										path: 'offer-list.js'
+									}
+		           }
+	       		}
+	       	}
+		}).use("st-offer-list",function(Y){
+			var offerList = new Y.ST.OfferList();
+			localStorage.setItem('userid',20121231);
+			localStorage.setItem('sessionid',20121231);
+			localStorage.setItem('cityTableName','offer_hangzhou_tb');
+			
+			//myDetail.plug(Y.Plugin.ST.Post);
+			//Y.log(myDetail);
+			/*
+			myDetail.on('post-recommend',function(e){
+				//Y.log('post-recommend');
+				//myPost.pop();	
+			});
+			*/
+		});
+	</script>	
+</body>
+</html>

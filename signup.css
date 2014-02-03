@@ -1,0 +1,24 @@
+#st-signup-step{
+	padding:10px;
+}
+#st-signup-step.setp-3{
+	text-align:center;
+}
+#st-signup-step li{
+	line-height:41px;
+	text-align:left;
+}
+#st-signup-step input[type='text'],
+#st-signup-step input[type='password']{
+	height:40px;
+	border:0;
+	font-size:18px;
+	margin-left:10px;
+	width:98%;
+	
+}
+#st-signup-step .signup-desc{
+	color:#999;
+	font-size:14px;
+	padding:10px 0;
+}

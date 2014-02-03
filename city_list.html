@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+</head>
+<body>
+	<div class='navigation'><h1 class='shadow'>说淘</h1></div>
+	<div class='wrap'>
+		<p class='city-list-title'>GPS定位</p>
+		<ul class='radius-li'>
+			<li id='city-gps'>正在进行定位...</li>
+		</ul>
+	</div>
+	<div id='city-list-wrap'>
+		<p class='city-list-title'>城市列表</p>
+		<ul id='city-list-ul' class='radius-li'>
+		</ul>	
+	
+	</div>
+
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI({
+			groups: {
+				st: {
+						 base: './',
+						 modules: {
+									'mustache':{
+										path:'mustache/mustache.js'	
+									},
+									'st-city-list-style':{
+										type:'css',
+										path:'city-list.css'
+									},
+									'st-list':{
+										requires:["base","node","io","mustache","node-load","widget","event","st-list-style","array-extras"],
+										path: 'list.js'
+									},
+									'st-city-list':{
+										requires:["st-list",'st-city-list-style'],
+										path: 'city-list.js'
+									}
+		           }
+	       		}
+	       	}
+		}).use("st-city-list",function(Y){
+			var list = new Y.ST.CityList();
+			localStorage.setItem('userid',20121231);
+			localStorage.setItem('sessionid',20121231);
+			localStorage.setItem('cityTableName','offer_hangzhou_tb');
+			
+			//myDetail.plug(Y.Plugin.ST.Post);
+			//Y.log(myDetail);
+			/*
+			myDetail.on('post-recommend',function(e){
+				//Y.log('post-recommend');
+				//myPost.pop();	
+			});
+			*/
+		});
+	</script>	
+</body>
+</html>

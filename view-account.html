@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+<link rel="stylesheet" href='view-account.css'>
+
+</head>
+<body>
+	<div class='navigation'><h1 class='shadow'>资料</h1></div>
+	<div id='st-view-account-wrap' class='wrap'>
+	</div>
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI({
+			groups: {
+				st: {
+						 base: './',
+						 modules: {
+									'mustache':{
+										path:'mustache/mustache.js'	
+									},
+									'st-view-account-style':{
+										type:'css',
+										path:'view-account.css'
+									},
+									'st-view-account':{
+										requires:["base","node","io","mustache","node-load","widget","event","st-view-account-style","array-extras"],
+										path: 'view-account.js'
+									}
+		           }
+	       		}
+	       	}
+		}).use("st-view-account",function(Y){
+			var viewAccount = new Y.ST.ViewAccount();
+			localStorage.setItem('userid',20121231);
+			localStorage.setItem('sessionid',20121231);
+			localStorage.setItem('cityTableName','offer_hangzhou_tb');
+			
+			//myDetail.plug(Y.Plugin.ST.Post);
+			//Y.log(myDetail);
+			/*
+			myDetail.on('post-recommend',function(e){
+				//Y.log('post-recommend');
+				//myPost.pop();	
+			});
+			*/
+		});
+	</script>	
+</body>
+</html>

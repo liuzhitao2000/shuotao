@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+<link rel="stylesheet" href='signup.css'>
+
+</head>
+<body>
+	<div class='navigation'><h1 class='shadow'>注册</h1></div>
+	<div id='st-signup-step' class='wrap'>
+		<ul class='radius-li'>
+			<li><input type='text' id='user-name' placeholder='请输入用户名'/></li>
+		</ul>
+		<div class='signup-desc'>使用真实姓名可以让更多朋友找到你。</div>
+		<a href='STaction://signup-step-2.html' id='next-btn' class='st-lowlight-btn'>下一步</a>
+	</div>
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI().use("node","event",function(Y){
+			Y.on('click',function(e){
+				e.preventDefault();
+				
+				var username = Y.one('#user-name').get('value');
+				localStorage.setItem('username',username);
+				
+				location.href= Y.one('#next-btn').get('href');
+				
+			},'#next-btn')
+		});
+	</script>	
+</body>
+</html>

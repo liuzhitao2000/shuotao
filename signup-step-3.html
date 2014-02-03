@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+<link rel="stylesheet" href='signup.css'>
+
+</head>
+<body>
+	<div class='navigation'><h1 class='shadow'>注册成功</h1></div>
+	<div id='st-signup-step' class='setp-3 wrap'>
+		<div>
+			<p><img src='asset/success.png' width='128' height='128'</p>
+		</div>
+		<ul class='radius-li'>
+			<li>你的手机号:<span id='j-user-phone'></span></li>
+			<li>密码:<span id='j-user-pwd'></span></li>
+		</ul>
+		<a href='STaction://modify-password.html' class='st-highlight-btn'>修改密码</a>
+		<a href='STaction://get-recommend-person-list.html' class='st-lowlight-btn'>下一步</a>
+	</div>
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI().use("node","event","json",function(Y){
+				Y.one('#j-user-phone').setContent(localStorage.getItem('userphone'));
+				Y.one('#j-user-pwd').setContent(localStorage.getItem('pwd'));
+
+		});
+	</script>		
+</body>
+</html>

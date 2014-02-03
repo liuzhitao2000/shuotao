@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+
+<style type="text/css" media="all">
+ul,li {
+	padding:10px;
+	margin:0;
+}
+
+body {
+	font-size:12px;
+	-webkit-user-select:none;
+  -webkit-text-size-adjust:none;
+	font-family:helvetica;
+}
+
+#wrapper {
+	margin-top:44px;
+	width:320px;
+	height:110px;
+	background:rgb(33,135,203);
+	float:left;
+	position:relative;	/* On older OS versions "position" and "z-index" must be defined, */
+	z-index:1;			/* it seems that recent webkit is less picky and works anyway. */
+	overflow:hidden;
+}
+
+#scroller {
+	width:960px;
+	height:100%;
+	float:left;
+	padding:0;
+}
+
+#scroller ul {
+	list-style:none;
+	display:block;
+	float:left;
+	width:100%;
+	height:100%;
+	padding:0;
+	margin:0;
+	text-align:left;
+}
+
+#scroller li {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	box-sizing:border-box;
+	display:block; float:left;
+	width:320px; height:160px;
+	text-align:left;
+	font-family:georgia;
+	font-size:18px;
+	line-height:140%;
+}
+#scroller li img{
+	margin-right:8px;
+}
+#scroller li img:last-child{
+	margin-right:0px;
+}
+
+
+#nav {
+	background:rgb(33,135,203);
+	width:320px;
+	text-align:center;
+	padding-bottom:10px;
+}
+
+#next {
+	float:right;
+	text-align:right;
+}
+
+#indicator, #indicator > li {
+	display:block; float:left;
+	list-style:none;
+	padding:0; margin:0;
+}
+
+#indicator {
+	width:40px;
+	margin:0 auto;
+	padding:12px 0 0 30px;
+	float:none;
+}
+
+#indicator > li {
+	text-indent:-9999em;
+	width:6px; height:6px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	-o-border-radius:3px;
+	border-radius:3px;
+	background:rgba(255,255,255,0.6);
+	overflow:hidden;
+	margin-right:4px;
+}
+
+#indicator > li.active {
+	background:rgba(255,255,255,1);
+}
+
+#indicator > li:last-child {
+	margin:0;
+}
+
+.title-bar{
+	background:url('asset/section_hbg.png') repeat-x;
+	height:22px;
+	line-height:24px;
+	padding-left:10px;
+	color:#fff;
+	text-shadow:0 1px 0 rgba(0,0,0,0.5);
+}
+
+
+</style>
+
+</head>
+<body>
+	<div class='navigation'>
+		<div class="x-button x-button-left">
+			<img src="asset/write.png" width='20' height='20' class="write">
+		</div>
+		<h1 class='shadow'>说淘</h1>
+		<div class="x-button x-button-right">
+			<img src="asset/refresh.png" width='20' height='20' class="refresh">
+		</div>
+		</div>
+	<div id="wrapper">
+		<div id="scroller">
+			<ul id="thelist">
+				<li>
+					<img src="asset/eat@2x.png" width="65" height='90' />
+					<img src="asset/customeat@2x.png" width="65" height='90' />
+					<img src="asset/movie@2x.png" width="65" height='90' />
+					<img src="asset/ktv@2x.png" width="65" height='90' />
+				</li>
+				<li>
+					<img src="asset/beau@2x.png" width="65" height='90' />
+					<img src="asset/hotel@2x.png" width="65" height='90' />
+					<img src="asset/shoot@2x.png" width="65" height='90' />
+					<img src="asset/game@2x.png" width="65" height='90' />
+				</li>
+				<li>
+					<img src="asset/shopping@2x.png" width="65" height='90' />
+					<img src="asset/lover@2x.png" width="65" height='90' />
+					<img src="asset/friendship@2x.png" width="65" height='90' />
+				</li>
+
+			</ul>
+		</div>
+	</div>
+	<div id="nav" class='clear'>
+		<ul id="indicator">
+			<li class="active">1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</div>
+	<div class='title-bar'>最新好友分享</div>
+	<div id='feed-list-wrap'>
+	
+	
+	
+	</div>
+
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI({
+			groups: {
+				st: {
+						 base: './',
+						 modules: {
+									'mustache':{
+										path:'mustache/mustache.js'	
+									},
+									'st-feed-list-style':{
+										type:'css',
+										path:'feed-list.css'
+									},
+									'st-feed-list':{
+										requires:["base","node","io","mustache","node-load","widget","event","st-feed-list-style","array-extras"],
+										path: 'feed-list.js'
+									},
+									'iscroll':{
+										path:'iscroll/iscroll.js'	
+									},
+									'phonegap':{
+										path:'phonegap/phonegap-1.0.0.js'	
+									}
+
+		           }
+	       		}
+	       	}
+		}).use("st-feed-list",'iscroll','phonegap-1-0-0',function(Y){
+			var list = new Y.ST.FeedList();
+			localStorage.setItem('userid',20121231);
+			localStorage.setItem('sessionid',20121231);
+			localStorage.setItem('cityTableName','offer_hangzhou_tb');
+
+			var	myScroll = new iScroll('wrapper', {
+					snap: true,
+					momentum: false,
+					hScrollbar: false,
+					onScrollEnd: function () {
+						document.querySelector('#indicator > li.active').className = '';
+						document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
+					}
+				 });
+
+
+			//myDetail.plug(Y.Plugin.ST.Post);
+			//Y.log(myDetail);
+			/*
+			myDetail.on('post-recommend',function(e){
+				//Y.log('post-recommend');
+				//myPost.pop();	
+			});
+			*/
+		});
+	</script>	
+</body>
+</html>

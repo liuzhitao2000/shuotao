@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+</head>
+<body>
+	<div class='navigation'><h1 class='shadow'>说淘</h1></div>
+	<div id='list-wrap'>
+	
+	
+	
+	</div>
+
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI({
+			groups: {
+				st: {
+						 base: './',
+						 modules: {
+									'mustache':{
+										path:'mustache/mustache.js'	
+									},
+									'st-feed-list-style':{
+										type:'css',
+										path:'feed-list.css'
+									},
+									'st-list':{
+										requires:["base","node","io","mustache","node-load","widget","event","st-feed-list-style","array-extras"],
+										path: 'list.js'
+									}
+		           }
+	       		}
+	       	}
+		}).use("st-list",function(Y){
+			var list = new Y.ST.List();
+			localStorage.setItem('userid',20121231);
+			localStorage.setItem('sessionid',20121231);
+			localStorage.setItem('cityTableName','offer_hangzhou_tb');
+			
+			//myDetail.plug(Y.Plugin.ST.Post);
+			//Y.log(myDetail);
+			/*
+			myDetail.on('post-recommend',function(e){
+				//Y.log('post-recommend');
+				//myPost.pop();	
+			});
+			*/
+		});
+	</script>	
+</body>
+</html>

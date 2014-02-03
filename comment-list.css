@@ -1,0 +1,53 @@
+#comment-list-wrap{
+}
+#comment-list-wrap .photo{
+	-webit-border-radius:5px;
+	border-radius:5px;
+	box-shadow:0 1px 2px rgba(0,0,0,0.3);
+	border: 3px solid #FFFFFF;
+}
+.data{
+	float:right;
+	}
+.tweet{
+}
+#comment-list-wrap .avatar{
+	float:left;
+	width:60px;
+}
+#comment-list-wrap .user-name{
+	font-weight:bold;
+}
+#comment-list-wrap .tweet-desc{
+	margin-left:60px;
+}
+#comment-list-wrap .tweet{
+	display:block;
+	padding:10px;
+	border-bottom:1px solid #ddd;
+	line-height:1.8;
+	color:#444;
+}
+#comment-list-wrap .tweet .offer{
+	text-indent:18px;
+	color:#666;
+	background:url(asset/lq.png) 0 5px no-repeat;
+
+}
+#comment-list-wrap .data{
+	color:#999;
+}
+#comment-list-wrap .offer-pic{
+	display:inline-block;
+	margin-top:5px;
+	border: 1px solid #CCCCCC;
+	box-shadow: 1px 2px 3px 0 #CCCCCC;
+	height: 71px;
+	overflow: hidden;
+	text-indent:0;
+}
+#comment-list-wrap .offer-pic img{
+ border: 3px solid #FFFFFF;
+}
+
+

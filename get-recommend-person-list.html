@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+</head>
+<body>
+	<div class='navigation'><h1 class='shadow'>说淘</h1></div>
+	<div id='recommend-person-list-wrap' class='person-list-wrap wrap'>
+	
+	
+	
+	</div>
+
+	<script src="phonegap/phonegap-1.0.0.js"></script>
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI({
+			groups: {
+				st: {
+						 base: './',
+						 modules: {
+									'mustache':{
+										path:'mustache/mustache.js'	
+									},
+									'st-list-style':{
+										type:'css',
+										path:'list.css'
+									},
+									'st-list':{
+										requires:["base","node","io","mustache","node-load","widget","event","st-list-style","array-extras"],
+										path: 'list.js'
+									},
+									'st-person-list-style':{
+										type:'css',
+										path:'person-list.css'
+									},
+									'st-person-list':{
+										requires:["st-list","st-person-list-style"],
+										path:'person-list.js'
+
+									},
+									'st-recommend-person-list':{
+										requires:["st-person-list"],
+										path:'recommend-person-list.js'
+									}
+		           }
+	       		}
+	       	}
+		}).use("st-recommend-person-list",function(Y){
+			var list = new Y.ST.RecommendPersonList();
+
+		});
+	</script>	
+</body>
+</html>
+

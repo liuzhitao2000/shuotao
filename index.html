@@ -1,0 +1,180 @@
+<!doctype hml>
+<html>
+<head>
+	<style>
+		body 	.clear:after {
+			clear:both;
+			content:"";
+			display:block;
+			visibility:hidden;
+		}
+		.data{
+			float:right;
+			}
+		.tweet{
+			margin-bottom:10px;
+			}
+
+		.c-loading{
+				border:1px solid #ccc;
+				text-align:center;
+				padding:5px;
+				background: #ffffff; /* Old browsers */
+				background: -moz-linear-gradient(top, #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Opera11.10+ */
+				background: -ms-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* IE10+ */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+				background: linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
+			}
+#st-wrap{
+			position:absolute;
+			}
+			#st-detail{
+				float:left;
+					position:fixed;
+					top:0;
+					
+				}
+	</style>
+</head>
+<body>
+<div id='st-wrap'>
+	<div id='st-list'>
+		<div id='j-loading' class='c-loading'>loading...</div>
+	</div>
+	<div id='st-detail'>detail</div>
+</div>
+
+	<script src="../yui/build/yui/yui.js"></script>
+	<script src="../yui/build/loader/loader.js"></script>
+	<script>
+		YUI().use("mustache","anim","node","array-extras","substitute","io","json-parse",function(Y){
+
+
+
+
+				var page=1,
+				getNewFeed = function(){
+					var url = "http://shuotao.me:8888/newfeed2/page="+page,
+					obj = Y.Get.script(url, {
+							onSuccess: function(o) {
+								 //var feed = Y.JSON.parse(j);
+								 Y.log(j.status);
+								var htmlarray = createBlock(j.feed),
+										 html="",m,n;
+								for(m=0,n=htmlarray.length;m<n;m++){
+										html+=htmlarray[m]; 
+								}
+								Y.one('#j-loading').insert(html,'before');
+							}
+					});
+				}
+				var createBlock = function(feed){
+					return Y.Array.map(feed, function (tweet) {
+							Y.log(tweet.source);
+							var filter = {
+									
+									hasSource:function(){
+											if(this.source&&this.source.srouce){
+													return true;
+											}else{
+													return false;	
+											}
+
+									},
+									isOffer:function(){
+											if(this.transmit_type == 2){
+												 return true;
+											}else{
+												return false;
+											}
+									},
+									isRetweet:function(){
+											if(this.transmit_type==1&&
+												!Y.Lang.isUndefined(this.source.source)&&
+												this.source.transmit_type==1){
+													return true;
+												}else{
+													return false;	
+												}
+										
+									},
+									isReOffer:function(){
+											if(this.transmit_type==1&&
+												!Y.Lang.isUndefined(this.source.source)&&
+												this.source.transmit_type==2){
+												return true;		
+											}else{
+												return false;	
+											}	
+									}
+								}
+
+
+							var o = Y.merge(tweet,filter);
+							Y.log(o);
+							return Y.mustache(tweetTemplate,o,parm);
+					});
+				};
+
+				var tweetTemplate =
+					'<div class="tweet clear">' +
+						'<div class="lt">' +
+							'<img width="48" height="48" src="{{avatar}}" class="photo" ' +
+								'alt="Profile photo for {{user_name}}">' +
+						'</div>' +
+						'<div class="rt clear">' +
+							'<span class="data">{{tweet_datetime}}</span>'+
+							'<p class="user">{{user_name}}</p>' +
+							'<p class="tweet-text">{{tweet}}</p>' +
+							'{{#isRetweet}}'+
+								'{{#source}}'+
+									'{{user_name}}'+':'+'{{tweet}}'+
+								'{{/source}}'+
+							'{{/isRetweet}}'+
+							'{{#isReOffer}}'+
+								'{{#source}}'+
+									'{{>offerTemplate}}'+
+								'{{/source}}'+
+							'{{/isReOffer}}'+
+						'</div>'+
+					'</div>',
+					parm ={
+						offerTemplate : 
+							'{{#source}}'+
+									'{{user_name}}'+ '{{title}}'+
+									'<p><img src="http://shuotao.me/staoapi/offer_files/{{image_url}}"</p>'+
+							'{{/source}}'
+					}
+
+				Y.one('#j-loading').on('click',function(){
+					page+=1;
+					getNewFeed();
+					
+					});
+				getNewFeed();
+				
+				var num = Y.one('body').get('winWidth');
+				var myAnim = new Y.Anim({
+						node: '#st-wrap',
+						to: {
+								left: -num+"px"
+						},
+						duration:0.3
+				});
+				Y.on('click',function(e){
+						Y.log(myAnim);
+						Y.one('#st-list').setStyle('width',num);
+						Y.one('#st-wrap').setStyle('width',num*2);
+						//Y.one('#st-detail').setStyle('left',num);
+						myAnim.run();
+					
+					},'.tweet');
+				Y.log(Y.one('body').get('winWidth'));
+		});
+	</script>
+</body>
+</html>
+

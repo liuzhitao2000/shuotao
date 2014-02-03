@@ -1,0 +1,40 @@
+#st-view-account-wrap{
+	padding:10px;	
+}
+#st-view-account-wrap .user-info{
+	margin-bottom:10px;
+}
+#st-view-account-wrap .avatar{
+	float:left;
+	width:60px;
+}
+#st-view-account-wrap .user-name{
+	font-weight:bold;
+	font-size:16px;
+	line-height:24px;
+}
+#st-view-account-wrap .user-id{
+	color:#999;
+}
+#st-view-account-wrap .sex{
+	vertical-align:middle;
+	margin-left:10px;
+}
+#st-view-account-wrap .desc{
+	margin-left:60px;
+}
+#st-view-account-wrap .user-status{
+	text-align:center;
+}
+
+#st-view-account-wrap td{
+	padding:10px;
+}
+#st-view-account-wrap li{
+	padding:10px;
+}
+#st-view-account-wrap .user-status td span{
+	display:block;
+}
+
+

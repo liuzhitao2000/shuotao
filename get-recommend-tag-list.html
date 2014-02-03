@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+</head>
+<body>
+	<div class='navigation'>
+		<h1 class='shadow'>说淘</h1>
+		<div class="x-button x-button-right"><span><a href='STaciton://get-recommend-tag-list.html'>下一步</a></span></div>	
+	</div>
+	<div id='recommend-tag-list-wrap' class='tag-list-wrap wrap'>
+	</div>
+
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI({
+			groups: {
+				st: {
+						 base: './',
+						 modules: {
+									'mustache':{
+										path:'mustache/mustache.js'	
+									},
+									'st-list-style':{
+										type:'css',
+										path:'list.css'
+									},
+									'st-list':{
+										requires:["base","node","io","mustache","node-load","widget","event","st-list-style","array-extras"],
+										path: 'list.js'
+									},
+									'st-tag-list-style':{
+										type:'css',
+										path:'tag-list.css'
+									},
+									'st-tag-list':{
+										requires:["st-list","st-tag-list-style"],
+										path:'tag-list.js'
+
+									},
+									'st-recommend-tag-list':{
+										requires:["st-tag-list"],
+										path:'recommend-tag-list.js'
+
+									}
+		           }
+	       		}
+	       	}
+		}).use("st-recommend-tag-list",function(Y){
+			var list = new Y.ST.RecommendTagList();
+		});
+	</script>	
+</body>
+</html>
+

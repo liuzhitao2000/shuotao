@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+
+</head>
+<body>
+	<div id='st-wrap'>
+		<div class='navigation'><h1 class='shadow'>说说</h1></div>
+		<div id='st-detail-wrap'>
+		</div>
+	</div>
+
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI({
+			groups: {
+				st: {
+					base: './',
+					modules: {
+						'mustache':{
+							path:'mustache/mustache.js'	
+						},
+						'st-detail-style':{
+							type:'css',
+							path:'detail.css'
+						},
+						'st-post-style':{
+							type:'css',
+							path:'post.css'							
+						},
+						'st-post':{
+							requires:["base","node","io","mustache","node-load","widget","event","st-post-style"],
+							path: 'post.js'
+						},
+						'st-detail': {
+							requires:["base","mustache","io","json-parse","node","widget","st-detail-style","event"],
+							path: 'detail.js'
+						}
+					}	
+				}
+			}
+
+		}).use("st-detail",function(Y){
+			var myDetail = new Y.ST.Detail({id:"#st-detail-wrap"});
+		});
+	</script>
+</body>
+</html>

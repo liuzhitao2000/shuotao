@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=UTF-8"/>
+<meta http-equiv="Cache-control" content="no-cache" />
+
+<link rel="stylesheet" href='yui/build/cssreset/reset.css'>
+<link rel="stylesheet" href='yui/build/cssfonts/fonts.css'>
+<link rel="stylesheet" href='st-base.css'>
+<link rel="stylesheet" href='modify-account.css'>
+
+</head>
+<body>
+	<div class='navigation'>
+		<h1 class='shadow'>编辑个人资料</h1>
+		<div class="x-button x-button-left"><span>返回</span></div>
+		<div class="x-button x-button-right"><span>保存</span></div>
+	</div>
+	<div id='st-modify-account-wrap' class='wrap'>
+		<ul class='radius-li'>
+			<li><img id='avatar' src='' height='64' width='64' /><span>上传头像</span></li>
+		</ul>
+		<ul class='radius-li'>
+			<li>
+				性别：
+				<label for='male'><input id='male' type='radio' name='user_sex' value='1' /><img src='asset/sex_1.png' /></label>
+				<label for='female'><input id='female' type='radio' name='user_sex' value='2' /><img src='asset/sex_2.png' /></label>
+			</li>
+		</ul>
+		<ul class='radius-li'>
+			<li>名字：<span id='j-user-name'></span></li>
+			<li>简介：<span id='j-user-summary'></span></li>
+		</ul>
+	</div>
+	<script src="phonegap/phonegap-1.0.0.js"></script>
+	<script src="yui/build/yui/yui.js"></script>
+	<script src="yui/build/loader/loader.js"></script>
+	<script>
+		YUI({
+			groups: {
+				st: {
+						 base: './',
+						 modules: {
+									'phonegap':{
+										path:'phonegap/phonegap-1.0.0.js'	
+									}
+
+		           }
+	       		}
+	       	}
+		}).use("node",'event','phonegap',function(Y){
+			localStorage.setItem('userid',4);
+			localStorage.setItem('sessionid','DnOX20');
+			localStorage.setItem('cityTableName','offer_hangzhou_tb');
+			localStorage.setItem('user_smmary','~_~');
+			localStorage.setItem('user_name','乌龙茶');
+			localStorage.setItem('user_sex','2');
+			
+			
+			localStorage.setItem('avatar',"http://shuotao.me/staoapi/files/newELChvHLwMiIqdhmIiGtqevL49UwYa93G.jpg");
+
+			var pictureSource=navigator.camera && navigator.camera.PictureSourceType,
+					destinationType=navigator.camera && navigator.camera.DestinationType;
+			
+
+			if(localStorage.getItem('avatar')){
+				Y.one('#avatar').setAttribute('src',localStorage.getItem('avatar')).setStyle('display','inline');
+			}
+			if(localStorage.getItem('user_sex')==1){
+				Y.one('#male').setAttribute('checked','checked');
+			}else{
+				Y.one('#female').setAttribute('checked','checked');
+			}
+
+			Y.one('#j-user-name').setContent(localStorage.getItem('user_name'));
+			Y.one('#j-user-summary').setContent(localStorage.getItem('user_smmary'));
+			
+			Y.on('click',function(e){
+				getPhoto(pictureSource.SAVEDPHOTOALBUM);
+					
+			},'#avatar',this);
+
+			function getPhoto(source) {
+				alert('getPhoto');
+				navigator.camera.getPicture(function(){
+						alert('do onphoto uri success');
+
+						var largeImage = Y.one('#avatar');
+
+						largeImage.setStyle('display','inline');
+
+						largeImage.setAttribute('src', imageURI);
+						uploadPhoto(imageURI);
+
+					
+				}, onFail, { quality: 50, 
+					destinationType: destinationType.FILE_URI,
+					sourceType: source });
+			}
+
+			function onPhotoURISuccess(mageURI) {
+				alert('do onphoto uri success');
+
+				var largeImage = Y.one('#avatar');
+
+				largeImage.setStyle('display','inline');
+
+				largeImage.setAttribute('src', imageURI);
+				uploadPhoto(imageURI);
+			}
+
+
+
+			 function uploadPhoto(imageURI) {
+					var options = new FileUploadOptions();
+					options.fileKey="userfile";
+					options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+					options.mimeType="image/jpeg";
+
+					var params = new Object();
+					params.session_id = "DnOX20";
+					params.user_id = "4";
+
+					options.params = params;
+
+					var ft = new FileTransfer();
+					ft.upload(imageURI, "http://shuotao.me/staoapi/upload_file.php?", function(result) {
+							console.log('Upload success: ' + result.responseCode);
+							console.log(result.bytesSent + ' bytes sent');
+							alert('success');
+					}, function(error) {
+						alert('error')
+							console.log('Error uploading file ' + path + ': ' + error.code);
+					}, options);
+				}
+			
+
+
+
+			//myDetail.plug(Y.Plugin.ST.Post);
+			//Y.log(myDetail);
+			/*
+			myDetail.on('post-recommend',function(e){
+				//Y.log('post-recommend');
+				//myPost.pop();	
+			});
+			*/
+		});
+	</script>	
+
+
+</body>
+</html>

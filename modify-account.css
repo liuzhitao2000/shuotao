@@ -1,0 +1,27 @@
+#st-modify-account-wrap{
+	padding:10px;	
+}
+#st-modify-account-wrap #avatar{
+	vertical-align:middle;
+	margin:5px 10px 5px 0;
+	display:none;
+}
+#st-modify-account-wrap ul{
+	margin:10px 0px;
+}
+
+#st-modify-account-wrap li{
+	line-height:40px;
+	font-size:14px;
+}
+#st-modify-account-wrap label{
+	margin-right:20px;
+}
+#st-modify-account-wrap input[type='radio']{
+	margin-right:10px;
+	width:15px;
+	height:15px;
+}
+#st-modify-account-wrap input[type='radio']+img{
+	vertical-align:middle;
+}

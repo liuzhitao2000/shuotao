@@ -1,0 +1,37 @@
+.person-list-wrap .avatar{
+	float:left;
+	width:60px;
+}
+.person-list-wrap .photo{
+	-webit-border-radius:5px;
+	border-radius:5px;
+	box-shadow:0 1px 2px rgba(0,0,0,0.3);
+	border: 3px solid #FFFFFF;
+
+}
+.person-list-wrap .person-desc{
+	margin-left:60px;
+}
+.person-list-wrap .person{
+		border-bottom: 1px solid #DDDDDD;
+    color: #444444;
+    display: block;
+    line-height: 1.8;
+    padding: 10px;
+}
+.person-list-wrap .person-name{
+	font-size:16px;
+	font-weight:bold;
+
+}
+
+.person-list-wrap .person-text{
+	color:#666;
+	font-size:14px;
+}
+
+.person-list-wrap .ctl-btn{
+	margin-top:-20px;	
+} 
+
+

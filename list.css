@@ -1,0 +1,24 @@
+.wrap .ctl-btn{
+	float:right;
+	margin-top:-40px;
+	cursor:pointer;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	padding:0px 15px;
+	color:#fff;
+	font-size:13px;
+	line-height:22px;
+	border:1px solid #339933;
+	background-image: -moz-linear-gradient( top,  #53d874 0% ,  #00ae3e 100%  );
+  background-image: -webkit-gradient( linear, 0  0% , 0  100% , from( #53d874 ), to( #00ae3e ) );
+	-webkit-text-shadow:0 -1px 0  rgba(13,180,70,0.7);
+	text-shadow:0 -1px 0  rgba(13,180,70,0.7);
+
+}
+.wrap .ctl-btn.unfollow{
+	border:1px solid #962c2c;
+	background-image: -moz-linear-gradient( top,  #f15c5d 0% ,  #c63738 100%  );
+  background-image: -webkit-gradient( linear, 0  0% , 0  100% , from( #f15c5d ), to( #c63738 ) );
+	-webkit-text-shadow:0 -1px 0  rgba(200,57,58,0.7);
+	text-shadow:0 -1px 0  rgba(200,57,58,0.7);
+}
